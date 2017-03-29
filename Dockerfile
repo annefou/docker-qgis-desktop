@@ -1,15 +1,12 @@
-FROM ubuntu:xenial
+FROM ubuntu:16.04
 MAINTAINER IT-DRIFT UIO <drift@geo.uio.no>
 
-RUN echo "deb     http://qgis.org/ubuntugis xenial main\n" >> /etc/apt/sources.list
-RUN echo "deb     http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu xenial main\n" >> /etc/apt/sources.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C4
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 089EBE08314DF160
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 073D307A618E5811
+RUN echo "deb http://qgis.org/debian xenial main\n" >> /etc/apt/sources.list
+RUN echo "deb-src http://qgis.org/debian xenial main\n" >> /etc/apt/sources.list
 
 RUN    apt-get -y update
-RUN    apt-get -y install qgis python-qgis qgis-plugin-grass grass grass-doc grass-gui
-RUN    apt-get -y install python-requests python-numpy python-pandas python-scipy python-matplotlib
+RUN    apt-get -y --allow-unauthenticated install xauth qgis python-qgis qgis-plugin-grass grass grass-doc grass-gui saga
+RUN    apt-get -y --allow-unauthenticated install python-requests python-numpy python-pandas python-scipy python-matplotlib
 
 RUN    apt-get clean \
     && apt-get purge
